@@ -1,0 +1,10 @@
+# docker-compose.yaml
+services:
+  localstack:
+    # versión localstack https://hub.docker.com/r/localstack/localstack/tags
+    image: localstack/localstack:3.0.2
+    ports:
+      - "4566:4566" # Puerto principal para servicios AWS
+    environment:
+      SERVICES: secretsmanager
+      DEBUG: 1

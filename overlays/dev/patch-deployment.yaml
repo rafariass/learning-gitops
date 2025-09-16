@@ -1,0 +1,19 @@
+# overlays/dev/patch-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Este nombre debe coincidir con el nombre del Deployment en la base
+  name: mi-app-nodejs
+spec:
+  # 1. Sobrescribe el número de réplicas
+  replicas: 2
+  template:
+    spec:
+      containers:
+        # Este nombre debe coincidir con el nombre del contenedor en la base
+      - name: mi-app
+        # 2. Añade o sobrescribe variables de entorno
+        env:
+          - name: APP_ENV
+            value: "development"
+

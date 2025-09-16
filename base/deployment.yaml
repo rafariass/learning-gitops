@@ -1,0 +1,32 @@
+# base/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mi-app-nodejs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mi-app-nodejs
+  template:
+    metadata:
+      labels:
+        app: mi-app-nodejs
+    spec:
+      automountServiceAccountToken: false # Desactiva el token si no se usa
+      containers:
+      - name: mi-app
+        image: node:22-alpine # Una imagen de ejemplo
+        ports:
+        - containerPort: 3000
+        env:
+        - name: APP_ENV
+          value: "base"
+        - name: DB_HOST
+          value: "db.example.com"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials # Nombre del Secret que creará External Secrets
+              key: password
+

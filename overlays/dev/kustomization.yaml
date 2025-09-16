@@ -1,0 +1,18 @@
+# overlays/dev/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# 1. Hereda todo de la base
+bases:
+- ../../base
+
+# 3. Se añade el ExternalSecret a los recursos de este entorno
+resources:
+- external-secret.yaml
+
+# 2. Aplica parches específicos para 'dev'
+patches:
+- path: patch-deployment.yaml # Fichero con los cambios
+  target:
+    kind: Deployment
+    name: mi-app-nodejs # Recurso específico a modificar

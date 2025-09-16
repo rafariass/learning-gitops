@@ -1,0 +1,22 @@
+# argocd/applications/app-dev.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mi-app-nodejs-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/rafariass/learning-gitops'
+    path: overlays/dev
+    targetRevision: develop
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: dev # Desplegaremos la app en un nuevo namespace llamado 'dev'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    # Crea el namespace 'dev' si no existe
+    syncOptions:
+    - CreateNamespace=true
