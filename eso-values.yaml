@@ -1,0 +1,14 @@
+# eso-values.yaml
+image:
+  repository: ghcr.io/external-secrets/external-secrets
+  tag: latest-aws
+
+env:
+  - name: AWS_ACCESS_KEY_ID
+    value: test
+  - name: AWS_SECRET_ACCESS_KEY
+    value: test
+  - name: AWS_REGION
+    value: us-east-1
+  - name: AWS_ENDPOINT_URL
+    value: "http://localhost:4566"
